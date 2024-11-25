@@ -1,0 +1,1 @@
+foremas start -f Procfile.dev
