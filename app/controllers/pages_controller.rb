@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  def Index
-    render "pages/index"
+  def index
   end
 end
