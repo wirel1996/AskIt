@@ -1,4 +1,9 @@
 class QuestionsController < ApplicationController
+    def destroy
+        @question = Question.find(params[:id])
+        @question.destroy
+        redirect_to questions_path, notice: "Question was successfully deleted."
+    end
     def edit
         @question = Question.find_by id: params[:id]
     end
