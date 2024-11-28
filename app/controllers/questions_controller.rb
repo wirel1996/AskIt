@@ -1,8 +1,11 @@
 class QuestionsController < ApplicationController
+    def show
+      @question = Question.find_by id: params[:id]
+    end
     def destroy
         @question = Question.find(params[:id])
         @question.destroy
-        redirect_to questions_path, notice: "Question was successfully deleted."
+        redirect_to questions_path
     end
     def edit
         @question = Question.find_by id: params[:id]
