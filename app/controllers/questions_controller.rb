@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
+  before_action :set_question!, only: %i[show destroy edit update]
     def show
-      @question = Question.find_by id: params[:id]
+      @answer = @question.answers.build
+      @answers = Answer.order created_at: :desc
     end
     def destroy
         @question = Question.find(params[:id])
@@ -38,9 +40,6 @@ class QuestionsController < ApplicationController
           render :new
         end
     end
-
-
-
     def update
         @question = Question.find_by id: params[:id]
         if @question.update question_params
@@ -51,7 +50,12 @@ class QuestionsController < ApplicationController
     end
 
     private
+
     def question_params
         params.require(:question).permit(:title, :body)
+    end
+
+    def set_question!
+      @question = Question.find params[:id]
     end
 end
