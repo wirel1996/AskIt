@@ -2,20 +2,17 @@ class QuestionsController < ApplicationController
   before_action :set_question!, only: %i[show destroy edit update]
     def show
       @answer = @question.answers.build
-      @answers = Answer.order created_at: :desc
+      @answers = @question.answers.order created_at: :desc
     end
     def destroy
-        @question = Question.find(params[:id])
         @question.destroy
         flash[:success] = "Question deleted!"
         redirect_to questions_path
     end
     def edit
-        @question = Question.find_by id: params[:id]
     end
 
     def update
-        @question = Question.find_by id: params[:id]
         if @question.update question_params
           flash[:success] = "Question update!"
           redirect_to questions_path
